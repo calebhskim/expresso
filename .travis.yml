@@ -1,9 +1,12 @@
 sudo: false
 language: node_js
 node_js:
-  - 'iojs'
-  - '0.12'
-  - '0.10'
+- iojs
+- '0.12'
+- '0.10'
 before_script:
-  - 'npm install -g bower grunt-cli'
-  - 'bower install'
+- npm install -g bower grunt-cli
+- bower install
+notifications:
+  slack:
+    secure: mnALtOTrW2hq5o+w93Tq7TUnxbpljqsyljtBazfKugR/odc0anaS2r3WXRDwF/NGVBPAjow0ciIfFxpqdzOoOt6iKNd0KhcQvlPYtkqNjpfxPM1vmWhEUY7ckcIsD8cEtGKT+fKZl4ZsMyD3fdzix1wBTGFz2ZqlNZYJGoNa/B0ABBp7fBFZVUtURZj6wzWOEQjXLywDwZztvxkv5w7wrNV1QTaWRArc3yvyvpg/ip8wTFtoKIv8dlA6gV3MD3w+bFXYvuuM8qiOAFxaM9roTwGZdcz8pg73DJqHMqVNcwRux4O2rczzqZC5HBh6h6+DAsxJhfO3WUy4dkQvO9oZ5j+manF1Quoi+Vfji3Rh5H40tGAs7Np/t8OJX4QRVXfw8ZpgjsEq/1ccOCoF+MFAQAH1Li/elfvQZMRcMd7NSiWT9giclyZhv7XJITiDF3hgW7DpgWMFAMEyX9myOdhxZ/Kzm6ffuDAxtO8xZ9VH+CAWdiqwGsuJktjioNIYH+sT7ImfGrM4UzU0T38dSYxnsrKKxbyJujNdvyvAaXxjUhKLbtg3LogwdI4jZECvJXVGIo0KbHxLicIH0KSpEzHiKWU58G9aIwGdUVZEWM+k9d9uqHGtRQt9fM2KFGPJLrN1uj560arC+aJheaNEy8u1Z90b6G49b/E2xXIH0orMj4g=
