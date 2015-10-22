@@ -15,9 +15,11 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ui.router',
+    'angular-oauth2'
   ]
-  .config ($routeProvider) ->
+  .config ($routeProvider, $stateProvider, OAuthProvider) ->
     $routeProvider
       .when '/',
         templateUrl: 'views/main.html'
