@@ -1,7 +1,9 @@
 {
   "name": "expresso",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "query-string": "^3.0.0"
+  },
   "repository": {},
   "devDependencies": {
     "coffee-script": "*",
