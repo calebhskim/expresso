@@ -38,10 +38,9 @@
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
             <ul class="nav navbar-nav">
-              <li><a href="#/">Home</a></li>
-              <li><a ng-href="#/about">About</a></li>
-              <li><a ng-href="#/">Contact</a></li>
-              <li><a ng-href="#/login">Login</a></li>
+              <li><a href="#/home" ui-sref="home">Home</a></li>
+              <li><a ui-sref="contact">Contact</a></li>
+              <li><a ui-sref="login">Login</a></li>
             </ul>
           </div>
         </div>
@@ -49,7 +48,7 @@
     </div>
 
     <div class="container">
-    <div ng-view=""></div>
+    <div ui-view></div>
     </div>
 
     <div class="footer">
@@ -91,6 +90,7 @@
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/contact.js"></script>
         <!-- endbuild -->
 </body>
 </html>

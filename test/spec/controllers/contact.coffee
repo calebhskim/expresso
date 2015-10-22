@@ -1,19 +1,20 @@
 'use strict'
 
-describe 'Controller: AboutCtrl', ->
+describe 'Controller: ContactCtrl', ->
 
   # load the controller's module
   beforeEach module 'expressoApp'
 
-  AboutCtrl = {}
+  ContactCtrl = {}
+
   scope = {}
 
   # Initialize the controller and a mock scope
   beforeEach inject ($controller, $rootScope) ->
     scope = $rootScope.$new()
-    AboutCtrl = $controller 'AboutCtrl', {
-      $scope: scope
+    ContactCtrl = $controller 'ContactCtrl', {
+      # place here mocked dependencies
     }
 
   it 'should attach a list of awesomeThings to the scope', ->
-    expect(scope.awesomeThings.length).toBe 3
+    expect(ContactCtrl.awesomeThings.length).toBe 3

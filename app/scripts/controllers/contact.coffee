@@ -2,15 +2,16 @@
 
 ###*
  # @ngdoc function
- # @name expressoApp.controller:AboutCtrl
+ # @name expressoApp.controller:ContactCtrl
  # @description
- # # AboutCtrl
+ # # ContactCtrl
  # Controller of the expressoApp
 ###
 angular.module 'expressoApp'
-  .controller 'AboutCtrl', ($scope) ->
-    $scope.awesomeThings = [
+  .controller 'ContactCtrl', ->
+    @awesomeThings = [
       'HTML5 Boilerplate'
       'AngularJS'
       'Karma'
     ]
+    return
