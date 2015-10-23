@@ -20,6 +20,6 @@
   "appPath": "app",
   "moduleName": "expressoApp",
   "resolutions": {
-    "query-string": "~3.0.0"
+    "query-string": "^1.0.0"
   }
 }
