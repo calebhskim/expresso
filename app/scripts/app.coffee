@@ -18,7 +18,7 @@ angular
     'ui.router',
     'angular-oauth2'
   ]
-  .config ($stateProvider) ->
+  .config ($stateProvider, $urlRouterProvider) ->
     $stateProvider
       .state('home', {
         url: '/',
@@ -38,3 +38,4 @@ angular
       .state('user', {
 
         })
+    $urlRouterProvider.otherwise('/')
