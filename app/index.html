@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="expressoApp">
+  <body ng-app="expressoApp" ng-controller="AppController">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -41,6 +41,8 @@
               <li><a href="#/home" ui-sref="home">Home</a></li>
               <li><a ui-sref="contact">Contact</a></li>
               <li><a ui-sref="login">Login</a></li>
+              <li ng-if="isAuthorized(userRoles.user)"><a ui-sref="user">User</a></li>
+              <!-- TODO: Add Dashboard option on authentication -->
             </ul>
           </div>
         </div>
@@ -91,6 +93,10 @@
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/login.js"></script>
         <script src="scripts/controllers/contact.js"></script>
+        <script src="scripts/controllers/user.js"></script>
+        <script src="scripts/services/session.js"></script>
+        <script src="scripts/services/authservice.js"></script>
+        <script src="scripts/services/customer.js"></script>
         <!-- endbuild -->
 </body>
 </html>
