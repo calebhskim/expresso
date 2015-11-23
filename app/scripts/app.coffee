@@ -14,6 +14,7 @@ angular
     'ngCookies',
     'ngResource',
     'ngSanitize',
+    'ngStorage',
     'ngTouch',
     'ui.router',
     'angular-oauth2'
@@ -94,13 +95,10 @@ angular
       # Redirect to `/login` with the `error_reason`.
       return $window.location.href = '/login?error_reason=' + rejection.data.error;
     )
-    $rootScope.$on('$stateChangeStart', (event, next) ->
-      authorizedRoles = next.data.authorizedRoles
-      console.log(authorizedRoles)
-      console.log(next)
-      console.log(AuthService.isAuthorized(authorizedRoles))
+    $rootScope.$on('$stateChangeStart', (event, state) ->
+      authorizedRoles = state.data.authorizedRoles
       if not AuthService.isAuthorized(authorizedRoles)
-        #event.preventDefault();
+        event.preventDefault();
         if AuthService.isAuthenticated()
           # user is not allowed
           $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
