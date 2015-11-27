@@ -1,5 +1,9 @@
 'use strict'
-
+# TODO: remove temporary file
+cred = {}
+$.getJSON('/credentials.json', (data) ->
+  cred = data
+)
 ###*
  # @ngdoc overview
  # @name expressoApp
@@ -34,11 +38,11 @@ angular
     user: 'user',
     guest: 'guest'
   })
-  .config ($stateProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider, USER_ROLES) ->
+  .config ($stateProvider, $sessionStorageProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider, USER_ROLES) ->
     OAuthProvider.configure({
       baseUrl: 'http://fathomless-sierra-4979.herokuapp.com',
-      clientId: 'c4be427f880b3ba97f0b',
-      clientSecret: '6e8a021d87308058c935c0c102b60589d720f85a', #optional
+      clientId: cred.clientId,
+      clientSecret: cred.clientSecret,
       grantPath:'/oauth2/access_token/?'
     })
     #TODO: Set secure back to true for HTTPS. seegno issue #21
@@ -82,7 +86,9 @@ angular
         }
         })
     $urlRouterProvider.otherwise('/')
-  .run ($rootScope, $window, OAuth, AuthService, AUTH_EVENTS) ->
+    $sessionStorageProvider.set('session', {id: null, userId: null, userRole: null})
+  .run ($rootScope, $state, $window, $sessionStorage, OAuth, AuthService, AUTH_EVENTS) ->
+    console.log($sessionStorage.session.userRole)
     $rootScope.$on('oauth:error', (event, rejection) ->
       # Ignore `invalid_grant` error - should be catched on `LoginController`.
       if 'invalid_grant' is rejection.data.error
@@ -93,7 +99,7 @@ angular
         return OAuth.getRefreshToken()
 
       # Redirect to `/login` with the `error_reason`.
-      return $window.location.href = '/login?error_reason=' + rejection.data.error;
+      return $window.location.href = '/login?error_reason=' + rejection.data.error
     )
     $rootScope.$on('$stateChangeStart', (event, state) ->
       authorizedRoles = state.data.authorizedRoles
@@ -105,6 +111,19 @@ angular
         else
           # user is not logged in
           $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+    )
+    $rootScope.$on(AUTH_EVENTS.loginSuccess, (event, state) ->
+      console.log('Login captured.')
+      console.log($sessionStorage.session.userRole)
+      $state.go('user')
+    )
+    $rootScope.$on(AUTH_EVENTS.notAuthorized, (event, state) ->
+      console.log('Not authorized captured.')
+      $state.go('home')
+    )
+    $rootScope.$on(AUTH_EVENTS.notAuthenticated, (event, state) ->
+      console.log('Not authenticated captured.')
+      $state.go('login')
     )
   .controller 'AppController', ($scope, AuthService, USER_ROLES) ->
       $scope.currentUser = null

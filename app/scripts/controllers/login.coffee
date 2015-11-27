@@ -10,7 +10,7 @@
 
 #Add user logout functionality
 angular.module 'expressoApp'
-   .controller 'LoginCtrl', ($rootScope, $scope, $sessionStorage, Session, OAuth, AuthService, AUTH_EVENTS) ->
+   .controller 'LoginCtrl', ($rootScope, $scope, Session, OAuth, AuthService, AUTH_EVENTS) ->
       $scope.credentials = {
          username: '',
          password: ''
@@ -24,12 +24,11 @@ angular.module 'expressoApp'
                   role: 'user',
                   id: null
                }
-               $rootScope.$broadcast(AUTH_EVENTS.loginSuccess)
                console.log("Login Success")
                console.log(msg)
-               console.log(user)
                $scope.setCurrentUser(user)
                Session.create(null, null, 'user')
+               $rootScope.$broadcast(AUTH_EVENTS.loginSuccess)
             (msg) ->
                $rootScope.$broadcast(AUTH_EVENTS.loginFailed)
                console.log("Login Failure")
