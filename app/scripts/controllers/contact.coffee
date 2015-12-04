@@ -8,8 +8,8 @@
  # Controller of the expressoApp
 ###
 angular.module 'expressoApp'
-  .controller 'ContactCtrl', ->
-    @awesomeThings = [
+  .controller 'ContactCtrl', ($scope) ->
+    $scope.awesomeThings = [
       'HTML5 Boilerplate'
       'AngularJS'
       'Karma'
