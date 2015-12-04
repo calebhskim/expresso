@@ -1,9 +1,5 @@
 'use strict'
-# TODO: remove temporary file
-cred = {}
-$.getJSON('/credentials.json', (data) ->
-  cred = data
-)
+
 ###*
  # @ngdoc overview
  # @name expressoApp
@@ -41,8 +37,8 @@ angular
   .config ($stateProvider, $sessionStorageProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider, USER_ROLES) ->
     OAuthProvider.configure({
       baseUrl: 'http://fathomless-sierra-4979.herokuapp.com',
-      clientId: cred.clientId,
-      clientSecret: cred.clientSecret,
+      clientId: 'c4be427f880b3ba97f0b',
+      clientSecret: '6e8a021d87308058c935c0c102b60589d720f85a',
       grantPath:'/oauth2/access_token/?'
     })
     #TODO: Set secure back to true for HTTPS. seegno issue #21
