@@ -10,12 +10,11 @@ describe 'Controller: ContactCtrl', ->
   scope = {}
 
   # Initialize the controller and a mock scope
-  beforeEach inject ($controller, $rootScope) ->
+  beforeEach inject ($controller, $rootScope, AuthService) ->
     scope = $rootScope.$new()
     ContactCtrl = $controller 'ContactCtrl', {
       # place here mocked dependencies
-      $scope: scope,
-      AuthService
+      $scope: scope
     }
 
   it 'should attach a list of awesomeThings to the scope', ->

@@ -9,11 +9,10 @@ describe 'Controller: LoginCtrl', ->
   scope = {}
 
   # Initialize the controller and a mock scope
-  beforeEach inject ($controller, $rootScope) ->
+  beforeEach inject ($controller, $rootScope, AuthService) ->
     scope = $rootScope.$new()
     LoginCtrl = $controller 'LoginCtrl', {
-      $scope: scope,
-      AuthService
+      $scope: scope
     }
 
   it 'should attach a list of awesomeThings to the scope', ->

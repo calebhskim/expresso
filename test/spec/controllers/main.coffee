@@ -9,11 +9,10 @@ describe 'Controller: MainCtrl', ->
   scope = {}
 
   # Initialize the controller and a mock scope
-  beforeEach inject ($controller, $rootScope) ->
+  beforeEach inject ($controller, $rootScope, AuthService) ->
     scope = $rootScope.$new()
     MainCtrl = $controller 'MainCtrl', {
       $scope: scope,
-      AuthService
     }
 
   it 'should attach a list of awesomeThings to the scope', ->
