@@ -14,6 +14,8 @@ describe 'Controller: ContactCtrl', ->
     scope = $rootScope.$new()
     ContactCtrl = $controller 'ContactCtrl', {
       # place here mocked dependencies
+      $scope: scope,
+      AuthService
     }
 
   it 'should attach a list of awesomeThings to the scope', ->

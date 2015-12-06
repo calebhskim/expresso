@@ -12,7 +12,8 @@ describe 'Controller: LoginCtrl', ->
   beforeEach inject ($controller, $rootScope) ->
     scope = $rootScope.$new()
     LoginCtrl = $controller 'LoginCtrl', {
-      $scope: scope
+      $scope: scope,
+      AuthService
     }
 
   it 'should attach a list of awesomeThings to the scope', ->
