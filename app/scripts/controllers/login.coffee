@@ -15,6 +15,11 @@ angular.module 'expressoApp'
          username: '',
          password: ''
       }
+      $scope.awesomeThings = [
+         'HTML5 Boilerplate'
+         'AngularJS'
+         'Karma'
+      ]
       $scope.login = (credentials) ->
          #TODO: Set current user
          OAuth.getAccessToken(credentials).then(
@@ -36,9 +41,3 @@ angular.module 'expressoApp'
          )
 
       $scope.logout = () ->
-
-      $scope.awesomeThings = [
-         'HTML5 Boilerplate'
-         'AngularJS'
-         'Karma'
-      ]
