@@ -10,6 +10,11 @@ before_script:
 - gem install compass
 - npm install -g bower grunt-cli
 - bower install
+before_install:
+  - wget https://s3.amazonaws.com/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2
+  - tar -xjf phantomjs-2.0.0-ubuntu-12.04.tar.bz2
+  - sudo rm -rf /usr/local/phantomjs/bin/phantomjs
+  - sudo mv phantomjs /usr/local/phantomjs/bin/phantomjs
 notifications:
   slack:
     secure: UTR2RzbFEfr0YaM+7UuP3JLShnkjUA/9g31isaZCTZtGatjy9XliULD+P2HYFe39ttGqV0rzklUeeCeMTEBlRVwmGeEUA8bJ9UCZmWS5T/DYvVX89fSB5o/woCy2Em6L4M2bFZUQt/ATyDNngi36JlhwOrLBEKNPAd1fD9B3N6htkKRuQjCJLWu19RjnvjTwDYi1xslbEh/wWzK6gj3yYYMrdEeCZSu3RwDC5Nm8XBQ/PpYYVf0pcZrLdWKaVbIQEaPNkaMS6XGJl8cNJUaYi8Fl+YWVBV2DNFNcEJTBmSpsFSgHZdbpcBt/0QPrjyWjxbdWgpEFLlBp19bg7+N8i159FEAZ2wDfI8uVVQWuk/PE/Ccm5K36S9RAD0CgpjtI8csnR6tQ3nqCyh0zeyB+rdGozUAYtwjUKyyfowkcH7ocXkvuAyjIVFjQQvKhZhtXVGGSU/8Dm/0SHwiGlWEBHlPKR9+0gM5i+B+GClMP8BTu7Ett02PXv2QE9s5CoCQS+QWcv0CvqFZ0y1YwCUtGeAVks6XQ31yFNM6elG7uokxFqnoaxSxbXqWveW/AdQwcyEMhaLWEPkDFKbAbqNG0GIqRJlU8mU7J1k3/CKxA74pQYgqeqc0ubm8+uJ8gXuRGPjo7pJgHzhs2GkNS7YcTi0T+zKNbKIiu6HNq5KXA6H4=

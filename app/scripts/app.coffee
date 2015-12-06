@@ -84,7 +84,7 @@ angular
     $urlRouterProvider.otherwise('/')
     $sessionStorageProvider.set('session', {id: null, userId: null, userRole: null})
   .run ($rootScope, $state, $window, $sessionStorage, OAuth, AuthService, AUTH_EVENTS) ->
-    console.log($sessionStorage.session.userRole)
+    #console.log($sessionStorage.session.userRole)
     $rootScope.$on('oauth:error', (event, rejection) ->
       # Ignore `invalid_grant` error - should be catched on `LoginController`.
       if 'invalid_grant' is rejection.data.error
@@ -109,16 +109,16 @@ angular
           $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
     )
     $rootScope.$on(AUTH_EVENTS.loginSuccess, (event, state) ->
-      console.log('Login captured.')
-      console.log($sessionStorage.session.userRole)
+      #console.log('Login captured.')
+      #console.log($sessionStorage.session.userRole)
       $state.go('user')
     )
     $rootScope.$on(AUTH_EVENTS.notAuthorized, (event, state) ->
-      console.log('Not authorized captured.')
+      #console.log('Not authorized captured.')
       $state.go('home')
     )
     $rootScope.$on(AUTH_EVENTS.notAuthenticated, (event, state) ->
-      console.log('Not authenticated captured.')
+      #console.log('Not authenticated captured.')
       $state.go('login')
     )
   .controller 'AppController', ($scope, AuthService, USER_ROLES) ->

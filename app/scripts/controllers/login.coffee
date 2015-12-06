@@ -24,15 +24,15 @@ angular.module 'expressoApp'
                   role: 'user',
                   id: null
                }
-               console.log("Login Success")
-               console.log(msg)
+               #console.log("Login Success")
+               #console.log(msg)
                $scope.setCurrentUser(user)
                Session.create(null, null, 'user')
                $rootScope.$broadcast(AUTH_EVENTS.loginSuccess)
             (msg) ->
                $rootScope.$broadcast(AUTH_EVENTS.loginFailed)
-               console.log("Login Failure")
-               console.log(msg)
+               #console.log("Login Failure")
+               #console.log(msg)
          )
 
       $scope.logout = () ->
