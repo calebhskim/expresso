@@ -18,4 +18,6 @@ describe 'Controller: ContactCtrl', ->
     }
 
   it 'should attach a list of awesomeThings to the scope', ->
+    console.log("CONTROL OBJECT")
+    console.log(ContactCtrl)
     expect(ContactCtrl.awesomeThings.length).toBe 3
