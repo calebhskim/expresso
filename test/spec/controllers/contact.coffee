@@ -12,12 +12,12 @@ describe 'Controller: ContactCtrl', ->
   # Initialize the controller and a mock scope
   beforeEach inject ($controller, $rootScope, AuthService) ->
     scope = $rootScope.$new()
-    ContactCtrl = $controller 'ContactCtrl', {
+    ContactCtrl = $controller('ContactCtrl', {
       # place here mocked dependencies
       $scope: scope
-    }
+    })
 
   it 'should attach a list of awesomeThings to the scope', ->
     console.log("CONTROL OBJECT")
-    console.log(ContactCtrl)
+    console.log(JSON.stringify(ContactCtrl))
     expect(ContactCtrl.awesomeThings.length).toBe 3
