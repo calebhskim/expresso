@@ -121,9 +121,9 @@ angular
       #console.log('Not authenticated captured.')
       $state.go('login')
     )
-  .controller 'AppController', ($scope, AuthService, USER_ROLES) ->
-      $scope.currentUser = null
-      $scope.userRoles = USER_ROLES
-      $scope.isAuthorized = AuthService.isAuthorized
-      $scope.setCurrentUser = (user) -> 
-        $scope.currentUser = user
+  # .controller 'AppController', ($scope, AuthService, USER_ROLES) ->
+  #     $scope.currentUser = null
+  #     $scope.userRoles = USER_ROLES
+  #     $scope.isAuthorized = AuthService.isAuthorized
+  #     $scope.setCurrentUser = (user) -> 
+  #       $scope.currentUser = user
