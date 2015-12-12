@@ -83,47 +83,47 @@ angular
         })
     $urlRouterProvider.otherwise('/')
     $sessionStorageProvider.set('session', {id: null, userId: null, userRole: null})
-  # .run ($rootScope, $state, $window, $sessionStorage, OAuth, AuthService, AUTH_EVENTS) ->
-  #   #console.log($sessionStorage.session.userRole)
-  #   $rootScope.$on('oauth:error', (event, rejection) ->
-  #     # Ignore `invalid_grant` error - should be catched on `LoginController`.
-  #     if 'invalid_grant' is rejection.data.error
-  #       return
+  .run ($rootScope, $state, $window, $sessionStorage, OAuth, AuthService, AUTH_EVENTS) ->
+    #console.log($sessionStorage.session.userRole)
+    $rootScope.$on('oauth:error', (event, rejection) ->
+      # Ignore `invalid_grant` error - should be catched on `LoginController`.
+      if 'invalid_grant' is rejection.data.error
+        return
 
-  #     # Refresh token when a `invalid_token` error occurs.
-  #     if 'invalid_token' is rejection.data.error 
-  #       return OAuth.getRefreshToken()
+      # Refresh token when a `invalid_token` error occurs.
+      if 'invalid_token' is rejection.data.error 
+        return OAuth.getRefreshToken()
 
-  #     # Redirect to `/login` with the `error_reason`.
-  #     return $window.location.href = '/login?error_reason=' + rejection.data.error
-  #   )
-  #   $rootScope.$on('$stateChangeStart', (event, state) ->
-  #     authorizedRoles = state.data.authorizedRoles
-  #     if not AuthService.isAuthorized(authorizedRoles)
-  #       event.preventDefault();
-  #       if AuthService.isAuthenticated()
-  #         # user is not allowed
-  #         $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
-  #       else
-  #         # user is not logged in
-  #         $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-  #   )
-  #   $rootScope.$on(AUTH_EVENTS.loginSuccess, (event, state) ->
-  #     #console.log('Login captured.')
-  #     #console.log($sessionStorage.session.userRole)
-  #     $state.go('user')
-  #   )
-  #   $rootScope.$on(AUTH_EVENTS.notAuthorized, (event, state) ->
-  #     #console.log('Not authorized captured.')
-  #     $state.go('home')
-  #   )
-  #   $rootScope.$on(AUTH_EVENTS.notAuthenticated, (event, state) ->
-  #     #console.log('Not authenticated captured.')
-  #     $state.go('login')
-  #   )
-  # .controller 'AppController', ($scope, AuthService, USER_ROLES) ->
-  #     $scope.currentUser = null
-  #     $scope.userRoles = USER_ROLES
-  #     $scope.isAuthorized = AuthService.isAuthorized
-  #     $scope.setCurrentUser = (user) -> 
-  #       $scope.currentUser = user
+      # Redirect to `/login` with the `error_reason`.
+      return $window.location.href = '/login?error_reason=' + rejection.data.error
+    )
+    $rootScope.$on('$stateChangeStart', (event, state) ->
+      authorizedRoles = state.data.authorizedRoles
+      if not AuthService.isAuthorized(authorizedRoles)
+        event.preventDefault();
+        if AuthService.isAuthenticated()
+          # user is not allowed
+          $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+        else
+          # user is not logged in
+          $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+    )
+    $rootScope.$on(AUTH_EVENTS.loginSuccess, (event, state) ->
+      #console.log('Login captured.')
+      #console.log($sessionStorage.session.userRole)
+      $state.go('user')
+    )
+    $rootScope.$on(AUTH_EVENTS.notAuthorized, (event, state) ->
+      #console.log('Not authorized captured.')
+      $state.go('home')
+    )
+    $rootScope.$on(AUTH_EVENTS.notAuthenticated, (event, state) ->
+      #console.log('Not authenticated captured.')
+      $state.go('login')
+    )
+  .controller 'AppController', ($scope, AuthService, USER_ROLES) ->
+      $scope.currentUser = null
+      $scope.userRoles = USER_ROLES
+      $scope.isAuthorized = AuthService.isAuthorized
+      $scope.setCurrentUser = (user) -> 
+        $scope.currentUser = user
