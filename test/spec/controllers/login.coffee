@@ -16,4 +16,4 @@ describe 'Controller: LoginCtrl', ->
     }
 
   it 'should attach a list of awesomeThings to the scope', ->
-    #expect(scope.awesomeThings.length).toBe 3
+    expect(scope.awesomeThings.length).toBe 3
