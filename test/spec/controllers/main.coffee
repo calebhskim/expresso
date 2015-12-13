@@ -5,6 +5,16 @@ describe 'Controller: MainCtrl', ->
   # load the controller's module
   beforeEach module 'expressoApp'
 
+  beforeEach ->
+    AuthServiceMock = {
+      isAuthenticated: ->
+      ,
+      isAuthorized: ->
+    }
+    module ($provide) ->
+      $provide.value 'AuthService', AuthServiceMock
+      null
+
   MainCtrl = {}
   scope = {}
 
