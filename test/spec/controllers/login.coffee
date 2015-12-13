@@ -11,8 +11,17 @@ describe 'Controller: LoginCtrl', ->
       ,
       isAuthorized: ->
     }
+    SessionMock = {
+      id: null,
+      userId: null,
+      userRole: null,
+      create: ->
+      ,
+      destroy: -> 
+    }
     module ($provide) ->
       $provide.value 'AuthService', AuthServiceMock
+      $provide.value 'Session', SessionMock
       null
 
   LoginCtrl = {}
