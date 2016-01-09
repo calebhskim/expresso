@@ -1,6 +1,6 @@
 'use strict'
 
-describe 'Controller: MainCtrl', ->
+describe 'Controller: ContactCtrl', ->
 
   # load the controller's module
   beforeEach module 'expressoApp'
@@ -11,19 +11,23 @@ describe 'Controller: MainCtrl', ->
       ,
       isAuthorized: ->
     }
+
     module ($provide) ->
       $provide.value 'AuthService', AuthServiceMock
       null
+      
+  ContactCtrl = {}
 
-  MainCtrl = {}
   scope = {}
 
   # Initialize the controller and a mock scope
   beforeEach inject ($controller, $rootScope, AuthService) ->
+    #AuthService = $injector.get('AuthService')
     scope = $rootScope.$new()
-    MainCtrl = $controller 'MainCtrl', {
+    ContactCtrl = $controller('ContactCtrl', {
+      # mocked dependencies
       $scope: scope
-    }
+    })
 
   it 'should attach a list of awesomeThings to the scope', ->
-    expect(scope.awesomeThings.length).toBe 3
+    expect(ContactCtrl.awesomeThings.length).toBe 3

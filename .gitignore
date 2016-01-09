@@ -1,5 +1,9 @@
 node_modules
+todo
 dist
 .tmp
 .sass-cache
 bower_components
+.notes
+ca.*
+server.*

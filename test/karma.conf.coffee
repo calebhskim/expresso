@@ -23,14 +23,22 @@ module.exports = (config) ->
       'bower_components/angular-animate/angular-animate.js'
       'bower_components/angular-cookies/angular-cookies.js'
       'bower_components/angular-resource/angular-resource.js'
-      'bower_components/angular-route/angular-route.js'
       'bower_components/angular-sanitize/angular-sanitize.js'
       'bower_components/angular-touch/angular-touch.js'
+      'bower_components/query-string/query-string.js'
+      'bower_components/angular-oauth2/dist/angular-oauth2.js'
+      'bower_components/angular-ui-router/release/angular-ui-router.js'
+      'bower_components/angular-route/angular-route.js'
+      'bower_components/ngstorage/ngStorage.js'
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
       'bower_components/angular-mocks/angular-mocks.js'
       # endbower
       # bower:coffee
       # endbower
-      "app/scripts/**/*.coffee"
+      "app/scripts/app.coffee"
+      "app/scripts/controllers/*.coffee"
+      "app/scripts/services/*.coffee"
+      # "app/scripts/**/*.coffee"
       "test/mock/**/*.coffee"
       "test/spec/**/*.coffee"
     ],

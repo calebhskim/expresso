@@ -66,12 +66,18 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        // 'localhost' for local
+        // hostname: '0.0.0.0',
+        // protocol: 'https',
+        // key: grunt.file.read('server.key').toString(),
+        // cert: grunt.file.read('server.crt').toString(),
+        // ca: grunt.file.read('ca.crt').toString(),
         livereload: 35729
       },
       livereload: {
         options: {
           open: true,
+          // protocol: 'https',
           middleware: function (connect) {
             return [
               connect.static('.tmp'),
@@ -444,6 +450,7 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {

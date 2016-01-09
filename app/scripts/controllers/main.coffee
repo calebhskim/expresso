@@ -8,7 +8,7 @@
  # Controller of the expressoApp
 ###
 angular.module 'expressoApp'
-  .controller 'MainCtrl', ($scope) ->
+  .controller 'MainCtrl', ($scope, $state) ->
     $scope.awesomeThings = [
       'HTML5 Boilerplate'
       'AngularJS'

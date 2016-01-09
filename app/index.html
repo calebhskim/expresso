@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js">
   <head>
     <meta charset="utf-8">
@@ -14,50 +14,83 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="expressoApp">
+  <!-- ng-controller="AppController" -->
+  <body ng-app="expressoApp" ng-controller="AppController" ng-cloak>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="header">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
+    <div>
+      <div class="header">
+        <div class="navbar navbar-default" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
 
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
 
-            <a class="navbar-brand" href="#/">expresso</a>
-          </div>
+              <a class="navbar-brand" href="#/">expresso</a>
+            </div>
 
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
+            <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
-            <ul class="nav navbar-nav">
-              <li><a href="#/">Home</a></li>
-              <li><a ng-href="#/about">About</a></li>
-              <li><a ng-href="#/">Contact</a></li>
-              <li><a ng-href="#/login">Login</a></li>
-            </ul>
+              <ul class="nav navbar-nav">
+                <li><a href="#/home" ui-sref="home">Home</a></li>
+                <li><a ui-sref="contact">Contact</a></li>
+                <li ng-if="!isAuthorized(userRoles.user)"><a ui-sref="login">Login</a></li>
+                <li ng-if="isAuthorized(userRoles.user)" class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span ng-bind="currentUser.name"></span> <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Account</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a ng-controller="LoginCtrl" ng-click="logout()" href="#">Logout</a></li>
+                  </ul>
+                </li>              
+                <!-- TODO: Add Dashboard option on authentication -->
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="container">
-    <div ng-view=""></div>
-    </div>
-
-    <div class="footer">
       <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-      </div>
-    </div>
+        
+        <div ng-controller="ModalCtrl">
+          <script type="text/ng-template" id="loginmodal.html">
+            <div class="modal-header">
+              <h3 class="modal-title">Please Login</h3>
+              <h5>Either you have not logged in or your session timed out! Please login to continue!</h5>
+            </div>
+            <div class="modal-body">
+              <form name="loginModalForm" ng-controller="LoginCtrl" ng-submit="login(credentials)" method="post" class="form-signin">
+                <label for="modalEmailAddress" class="sr-only">Email address</label>
+                <input ng-model="credentials.username" type="text" id="modalEmailAddress" class="form-control" placeholder="Email address" required autofocus>
+                <label for="modalPassword" class="sr-only">Password</label>
+                <input ng-model="credentials.password" type="password" id="modalPassword" class="form-control" placeholder="Password" required>
+                <button class="btn btn-primary" type="submit">Sign in</button>
+                <button type="button" class="btn btn-warning" ng-click="cancel()">Cancel</button> 
+              </form> 
+            </div>
+          </script>
+        </div>
 
+        <div ui-view></div>
+      </div>
+
+      <div class="footer">
+        <div class="container">
+          <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+        </div>
+      </div>
+
+    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -78,19 +111,29 @@
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/query-string/query-string.min.js"></script>
-    <script src="bower_components/angular-oauth2/dist/angular-oauth2.min.js"></script>
+    <script src="bower_components/query-string/query-string.js"></script>
+    <script src="bower_components/angular-oauth2/dist/angular-oauth2.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/ngstorage/ngStorage.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/contact.js"></script>
+        <script src="scripts/services/session.js"></script>
+        <script src="scripts/services/authservice.js"></script>
+        <script src="scripts/services/customer.js"></script>
+        <script src="scripts/services/authresolver.js"></script>
+        <script src="scripts/controllers/modal.js"></script>
+        <script src="scripts/controllers/modalinstance.js"></script>
+        <script src="scripts/controllers/user.js"></script>
         <!-- endbuild -->
 </body>
 </html>
