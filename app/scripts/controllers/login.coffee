@@ -10,16 +10,18 @@
 
 #Add user logout functionality
 angular.module 'expressoApp'
-   .controller 'LoginCtrl', ($rootScope, $scope, Session, OAuth, AuthService, AUTH_EVENTS) ->
-      $scope.credentials = {
-         username: '',
-         password: ''
-      }
+   .controller 'LoginCtrl', ($rootScope, $state, $scope, Session, OAuth, AuthService, AUTH_EVENTS, USER_ROLES) ->
       $scope.awesomeThings = [
          'HTML5 Boilerplate'
          'AngularJS'
          'Karma'
       ]
+
+      $scope.credentials = {
+         username: '',
+         password: ''
+      }
+
       $scope.login = (credentials) ->
          #TODO: Set current user
          OAuth.getAccessToken(credentials).then(
@@ -29,15 +31,26 @@ angular.module 'expressoApp'
                   role: 'user',
                   id: null
                }
-               #console.log("Login Success")
-               #console.log(msg)
-               $scope.setCurrentUser(user)
+               $rootScope.setCurrentUser(user)
                Session.create(null, null, 'user')
                $rootScope.$broadcast(AUTH_EVENTS.loginSuccess)
+               
             (msg) ->
                $rootScope.$broadcast(AUTH_EVENTS.loginFailed)
-               #console.log("Login Failure")
-               #console.log(msg)
          )
 
       $scope.logout = () ->
+         OAuth.revokeToken().then(
+            (msg) ->
+            (msg) ->
+               $rootScope.$broadcast(AUTH_EVENTS.logoutFailure)
+         )
+         user = {
+            name : null,
+            role: null,
+            id: null
+         }
+         $rootScope.setCurrentUser(user)
+         Session.destroy()
+         $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess)
+         $state.go('home')
