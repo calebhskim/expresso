@@ -28,6 +28,9 @@ angular
       .when '/login',
         templateUrl: 'views/login.html'
         controller: 'LoginCtrl'
+      .when '/menu',
+        templateUrl: 'views/menu.html'
+        controller: 'MenuCtrl'
       .otherwise
         redirectTo: '/'
 

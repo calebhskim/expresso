@@ -1,0 +1,173 @@
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+  border-color: #d55828;
+}
+.navbar-inverse .navbar-toggle {
+    border-color: rgba(0,0,0,0);
+}
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+    background-color: rgba(0,0,0,0.1);
+}
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border-color: #d55828;
+}
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+	text-align: center;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #FFBA49;
+    border-right: 1px solid #eee;
+		max-width: 300px;
+  }
+}
+.logocont {
+	margin:-20px -20px 10px -20px;
+	padding: 10px 0;
+	background-color: #ec622c
+}
+.logocont img {
+	width: 50px;
+	padding: 10px 0;
+}
+.logocont h4 {
+	color: #fff;
+	padding: 0;
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+	text-align: left;
+  color: #fff;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.nav-sidebar > li > a:hover, .nav-sidebar > li > a:focus {
+  background-color: rgba(236,147,0,0.5)
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+  background-color: #EE9300;
+}
+
+/* Navbar */
+
+.navbar {
+    color: #fff;
+    background-color: #ec622c;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: rgba(255,255,255,0.75);
+}
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+  color: #ffffff;
+  background-color: rgba(0,0,0,0.1);
+}
+
+@media (max-width: 767px) {
+    .navbar-inverse .navbar-nav .open .dropdown-menu .divider {
+    background-color: #d55828;
+    }
+    .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+    color: #ffffff;
+    }
+}
+
+
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
+
+.itemedit-image img {
+    width: 100%;
+    border-radius: 6px;
+}
+.itemedit-image img:hover {
+    border: 2px solid #d55828;
+}
+.itemedit-image div {
+    position: absolute;
+    height: 100%;
+    display: none;
+}
+
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
