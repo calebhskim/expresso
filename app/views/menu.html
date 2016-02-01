@@ -1,0 +1,240 @@
+<!-- Main Content Container for Menu Dashboard -->
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <!-- Welcome text for Store -->
+          <h3 class="page-header">Welcome, Slo Do Co!</h3>
+        </div>
+        <div class="col-sm-6"> <!-- First Bootstrap Column -->
+        <div class="panel panel-primary">
+          <div class="panel-heading">Menu Items</div>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th style="text-align:right;"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></th>
+                </tr>
+              </thead>
+              <tbody>
+                  
+                <tr style="cursor:pointer;" onclick="">
+                  <td>Americano<br><small style="opacity: 0.6;">Hot Drinks</small></td>
+                    <td style="text-align:right;"><strong>$1.75</strong><br><small style="opacity: 0.6;">3 Sizes – 5 Customizations</small></td>
+                </tr>
+                  
+                <tr style="cursor:pointer;" onclick="">
+                  <td>Cappucino<br><small style="opacity: 0.6;">Hot Drinks</small></td>
+                    <td style="text-align:right;"><strong>$2.25</strong><br><small style="opacity: 0.6;">3 Sizes – 7 Customizations</small></td>
+                </tr>
+                  
+                <tr style="cursor:pointer;" onclick="">
+                  <td>Coffee<br><small style="opacity: 0.6;">Hot Drinks</small></td>
+                    <td style="text-align:right;"><strong>$3.50</strong><br><small style="opacity: 0.6;">3 Sizes – 5 Customizations</small></td>
+                </tr>
+                  
+                <tr style="cursor:pointer;" onclick="">
+                  <td>Espresso<br><small style="opacity: 0.6;">Hot Drinks</small></td>
+                    <td style="text-align:right;"><strong>$1.50</strong><br><small style="opacity: 0.6;">1 Size – 7 Customizations</small></td>
+                </tr>
+                  
+                <tr style="cursor:pointer;" onclick="">
+                  <td>Hot Chocolate<br><small style="opacity: 0.6;">Hot Drinks</small></td>
+                    <td style="text-align:right;"><strong>$2.00</strong><br><small style="opacity: 0.6;">3 Sizes – 4 Customizations</small></td>
+                </tr>
+                  
+                <tr style="cursor:pointer;" onclick="">
+                  <td>Hot Tea<br><small style="opacity: 0.6;">Hot Drinks</small></td>
+                    <td style="text-align:right;"><strong>$1.10</strong><br><small style="opacity: 0.6;">1 Size – 0 Customizations</small></td>
+                </tr>
+                  
+                <tr style="cursor:pointer;" onclick="">
+                  <td>Latte<br><small style="opacity: 0.6;">Hot Drinks</small></td>
+                    <td style="text-align:right;"><strong>$1.75</strong><br><small style="opacity: 0.6;">3 Sizes – 14 Customizations</small></td>
+                </tr>
+                  
+                <tr style="cursor:pointer;" onclick="">
+                  <td>Mocha<br><small style="opacity: 0.6;">Hot Drinks</small></td>
+                    <td style="text-align:right;"><strong>$1.75</strong><br><small style="opacity: 0.6;">3 Sizes – 6 Customizations</small></td>
+                </tr>
+                  
+                <tr onclick="" style="font-style:italic;"> <!-- New Item Addition Menu Option -->
+                  <td width="50%"><input type="text" class="form-control input-sm" placeholder="New Menu Item"><br><input type="text" class="form-control input-sm" placeholder="Item Category"><small style="opacity: 0.6;"></small></td>
+                    <td style="text-align:right;"><div class="input-group"><span class="input-group-addon"><strong>$</strong></span><strong><input type="number" class="form-control input-sm" placeholder="0.00" step=".01"></strong></div><br><button type="button" class="btn btn-primary btn-sm btn-block"><strong style="font-style:normal;">Add Item</strong></button></td>
+                    
+                </tr>
+                  
+              </tbody>
+            </table>
+          </div>
+          </div>
+        </div>
+        
+        <div class="col-sm-6"> <!-- Second Bootstrap Column -->
+            
+            <!-- Panel for Inactive Item Edit, will show "Select a Menu Item" -->
+            <div class="panel panel-default" style="display:none;">
+              <div class="panel-body" style="opacity: 0.5;">
+                  <p>&nbsp;</p>
+                <span style="font-size:64px; text-align:center; width:100%;" class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span>
+                  <h4 style="text-align:center;"><br>Select a Menu Item<br>&nbsp;</h4>
+              </div>
+            </div>
+            
+            <!-- End Inactive Item Panel -->
+            
+            <!-- Item Edit Panel -->
+            
+            <div class="panel panel-primary">
+                <div class="panel-heading">Item Edit</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="itemedit-image col-xs-3">
+                            <div><span class="glyphicon glyphicon-cloud-upload"></span></div>
+                            <img class="itemedit-image" src="images/americano.jpg" width="100%;"> <!-- Menu Item Image -->
+                            
+                        </div>
+                        <div class="col-xs-9"> <!-- Menu Item Title and Category Fields -->
+                            <p><input type="text" class="form-control input-lg" placeholder="Item Name" value="Americano"></p>
+                            <p><input type="text" class="form-control input" placeholder="Item Category" value="Hot Drinks"></p> <!-- Changes Item Category. Reccomended options of current cateogries will dropdown while typing. Inputting a category that doesn't exist will create a new category with that name -->
+                        </div>
+                    </div>
+                </div>
+            <div class="table-responsive"> <!-- Sizes Table -->
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Sizes</th>
+                  <th>&nbsp;</th>
+                  <th style="text-align:center;" style="width:30px;"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></th>
+                </tr>
+              </thead>
+              <tbody>
+                  
+                <tr>
+                  <td>Small</td>
+                    <td style="text-align:right;"><strong>$1.75</strong></td>
+                    <td style="cursor:pointer; width:30px; text-align:center;"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
+                </tr>
+                  
+                <tr>
+                  <td>Medium</td>
+                    <td style="text-align:right;"><strong>$2.25</strong></td>
+                    <td style="cursor:pointer; width:30px; text-align:center;"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
+                </tr>
+                  
+                <tr>
+                  <td>Large</td>
+                    <td style="text-align:right;"><strong>$2.65</strong></td>
+                    <td style="cursor:pointer; width:30px; text-align:center;"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
+                </tr>
+                  
+                <tr style="font-style:italic;"> <!-- Add New Size Table Option -->
+                  <td width="50%"><input type="text" class="form-control input-sm" placeholder="New Size"></td>
+                    <td style="text-align:right; vertical-align:middle;"><div class="input-group"><span class="input-group-addon"><strong>$</strong></span><strong><input type="number" class="form-control input-sm" placeholder="0.00" step=".01"></strong></div></td>
+                    <td style="cursor:pointer; width:30px; text-align:center; vertical-align:middle;"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true" style="color:#ec622c"></span></td>
+                </tr>
+              </tbody>
+              </table>
+              </div>
+                <div class="panel-body">&nbsp;</div> <!-- Blank Space for Padding -->
+                <div class="table-responsive"> <!-- Customizations Table -->
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Customizations</th>
+                  <th></th>
+                  <th style="text-align:center;" style="width:30px;"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></th>
+                </tr>
+              </thead>
+              <tbody>
+                  
+                <tr> <!-- Initial Customization from Customizations Page -->
+                  <td>Whipped Cream</td>
+                    <td></td>
+                    <td style="cursor:pointer; width:30px; text-align:center;"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
+                </tr>
+                
+                <!-- Customization "Include" Options for specific item -->
+                <tr style="background-color: #f5f5f5;">
+                  <td><span style="padding: 0 10px; color: #aaa" class="glyphicon glyphicon-plus" aria-hidden="true"></span>No Whipped Cream</td>
+                    <td style="text-align:right;"><em>+ $0.00</em></td>
+                    <td style="text-align:center;"><input type="checkbox" value="" checked></td>
+                </tr>
+                  
+                <tr style="background-color: #f5f5f5;">
+                    <td><span style="padding: 0 10px; color: #aaa" class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add Whipped Cream</td>
+                    <td style="text-align:right;"><em>+ $0.50</em></td>
+                    <td style="text-align:center;"><input type="checkbox" value=""></td>
+                </tr>
+                  
+                <!-- End Customization "Include" Options -->
+                  
+                <tr>
+                  <td>Espresso Shots</td>
+                    <td></td>
+                    <td style="cursor:pointer; width:30px; text-align:center;"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
+                </tr>
+                  
+                <tr style="background-color: #f5f5f5;">
+                  <td><span style="padding: 0 10px; color: #aaa" class="glyphicon glyphicon-plus" aria-hidden="true"></span>No Extra Shots</td>
+                    <td style="text-align:right;"><em>+ $0.00</em></td>
+                    <td style="text-align:center;"><input type="checkbox" value="" checked></td>
+                </tr>
+                  
+                <tr style="background-color: #f5f5f5;">
+                    <td><span style="padding: 0 10px; color: #aaa" class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add One Shot</td>
+                    <td style="text-align:right;"><em>+ $0.50</em></td>
+                    <td style="text-align:center;"><input type="checkbox" value="" checked></td>
+                </tr>
+                  
+                <tr style="background-color: #f5f5f5;">
+                    <td><span style="padding: 0 10px; color: #aaa" class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add Two Shots</td>
+                    <td style="text-align:right;"><em>+ $0.90</em></td>
+                    <td style="text-align:center;"><input type="checkbox" value=""></td>
+                </tr>
+                  
+                <tr style="font-style:italic;"> <!-- Add Customization from preset Customizations in Customizations page table option -->
+                      <td>
+                        <select class="form-control input-sm"> <!-- Customization options pulled from Customizations page, will disclude currently selected customizations -->
+                          <option selected disabled>Add Customization</option>
+                          <option>Milk</option>
+                          <option>Syrups</option>
+                          <option>Decaf</option>
+                        </select>
+                      </td>
+                    <td></td>
+                    <td style="cursor:pointer; width:30px; text-align:center; vertical-align:middle;"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true" style="color:#ec622c"></span></td>
+                </tr>
+              </tbody>
+                        </table>
+                    </div>
+                
+                <div class="panel-body">
+                    <p style="text-align:center;">&nbsp;<br><button type="button" class="btn btn-danger btn-sm" style="border-color:#;" data-toggle="modal" data-target="#deleteModal">Delete Menu Item</button></p>
+                
+                </div>
+                </div>
+            </div>
+            
+        </div>
+      </div>
+
+<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Delete Menu Item</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete "Americano" from your menu?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger">Delete</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -11,7 +11,8 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/bootstrap.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
     <!-- endbuild -->
   </head>
   <!-- ng-controller="AppController" -->
@@ -21,68 +22,65 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-      <div class="navbar navbar-default" role="navigation">
+    <div class="container">
+
+    <div class="header">
+      <!-- Navbar Code -->
+      <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#/">expresso</a>
+            <a class="navbar-brand" href="#/"><img src="images/expressologo.svg" height="32px" style="margin:-6px; width:40px;"></a>
           </div>
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="#/home" ui-sref="home">Home</a></li>
-              <li><a ui-sref="contact">Contact</a></li>
-              <li ng-if="!isAuthorized(userRoles.user)"><a ui-sref="login">Login</a></li>
-              <li ng-if="isAuthorized(userRoles.user)" class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span ng-bind="currentUser.name"></span> <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Dashboard</a></li>
-                  <li><a href="#">Account</a></li>
-                  <li><a href="#">Settings</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a ng-controller="LoginCtrl" ng-click="logout()" href="#">Logout</a></li>
-                </ul>
-              </li>              
-              <!-- TODO: Add Dashboard option on authentication -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul ng-if="isAuthorized(userRoles.user)"class="nav navbar-nav">
+              <li><a href="#/menu">Menu<span class="sr-only"></span></a></li>
+              <li><a href="#/customizations">Customizations</a></li>
+              <li><a href="#/inventory">Inventory</a></li>
             </ul>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-        
-        <div ng-controller="ModalCtrl">
-          <script type="text/ng-template" id="loginmodal.html">
-            <div class="modal-header">
-              <h3 class="modal-title">Please Login</h3>
-              <h5>Either you have not logged in or your session timed out! Please login to continue!</h5>
-            </div>
-            <div class="modal-body">
-              <form name="loginModalForm" ng-controller="LoginCtrl" ng-submit="login(credentials)" method="post" class="form-signin">
-                <label for="modalEmailAddress" class="sr-only">Email address</label>
-                <input ng-model="credentials.username" type="text" id="modalEmailAddress" class="form-control" placeholder="Email address" required autofocus>
-                <label for="modalPassword" class="sr-only">Password</label>
-                <input ng-model="credentials.password" type="password" id="modalPassword" class="form-control" placeholder="Password" required>
-                <button class="btn btn-primary" type="submit">Sign in</button>
-                <button type="button" class="btn btn-warning" ng-click="cancel()">Cancel</button> 
-              </form> 
-            </div>
-          </script>
-        </div>
-
-        <div ui-view></div>
-      </div>
-
-      <div class="footer">
-        <div class="container">
-          <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-        </div>
-      </div>
-
+            <ul class="nav navbar-nav navbar-right">
+              <li ng-if="!isAuthorized(userRoles.user)"><a ui-sref="signin">Login</a></li>
+              <li ng-if="isAuthorized(userRoles.user)" class="dropdown">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span ng-bind="currentUser.name"></span> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#/storeinfo">General Information</a></li>
+                  <li><a href="#/storemedia">Store Media</a></li>
+                  <li><a href="#/storepayment">Payment Settings</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a ng-controller="LoginCtrl" ng-click="logout()" href="#/signin">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+      <!-- Navbar Code End -->
     </div>
+
+    <div ng-controller="ModalCtrl">
+      <script type="text/ng-template" id="loginmodal.html">
+        <div class="modal-header">
+          <h3 class="modal-title">Please Login</h3>
+          <h5>Either you have not logged in or your session timed out! Please login to continue!</h5>
+        </div>
+        <div class="modal-body">
+          <form name="loginModalForm" ng-controller="LoginCtrl" ng-submit="login(credentials)" method="post" class="form-signin">
+            <label for="modalEmailAddress" class="sr-only">Email address</label>
+            <input ng-model="credentials.username" type="text" id="modalEmailAddress" class="form-control" placeholder="Email address" required autofocus>
+            <label for="modalPassword" class="sr-only">Password</label>
+            <input ng-model="credentials.password" type="password" id="modalPassword" class="form-control" placeholder="Password" required>
+            <button class="btn btn-primary" type="submit">Sign in</button>
+            <button type="button" class="btn btn-warning" ng-click="cancel()">Cancel</button> 
+          </form> 
+        </div>
+      </script>
+    </div>
+    <div ui-view></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -111,6 +109,7 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/ngstorage/ngStorage.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
     <!-- endbower -->
     <!-- endbuild -->
 

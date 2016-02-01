@@ -38,7 +38,7 @@ angular
   })
   .config ($stateProvider, $sessionStorageProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider, USER_ROLES) ->
     OAuthProvider.configure({
-      baseUrl: 'http://fathomless-sierra-4979.herokuapp.com',
+      baseUrl: 'http://fathomless-sierra-4979.herokuapp.com/api/v1.2',
       clientId: 'c4be427f880b3ba97f0b',
       clientSecret: '6e8a021d87308058c935c0c102b60589d720f85a',
       grantPath:'/oauth2/access_token/?',
@@ -68,12 +68,76 @@ angular
           authorizedRoles: [USER_ROLES.all]
         }
         })
+      .state('about', {
+        url: '/about',
+        templateUrl: 'views/about.html',
+        controller: 'AboutCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+        })
       .state('login', {
         url: '/login',
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
         data: {
           authorizedRoles: [USER_ROLES.all]
+        }
+        })
+      .state('signin', {
+        url: '/signin',
+        templateUrl: 'views/signin.html',
+        controller: 'LoginCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.all]
+        }
+        })
+      .state('menu', {
+        url: '/menu',
+        templateUrl: 'views/menu.html',
+        controller: 'MenuCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.admin, USER_ROLES.user]
+        }
+        })
+      .state('customizations', {
+        url: '/customizations',
+        templateUrl: 'views/customizations.html',
+        controller: 'CustomizationsCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.admin, USER_ROLES.user]
+        }
+        })
+      .state('inventory', {
+        url: '/inventory',
+        templateUrl: 'views/inventory.html',
+        controller: 'InventoryCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.admin, USER_ROLES.user]
+        }
+        })
+      .state('storeinfo', {
+        url: '/storeinfo',
+        templateUrl: 'views/storeinfo.html',
+        controller: 'StoreInfoCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.admin, USER_ROLES.user]
+        }
+        })
+      .state('storemedia', {
+        url: '/storemedia',
+        templateUrl: 'views/storemedia.html',
+        controller: 'StoreMediaCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.admin, USER_ROLES.user]
+        }
+        })
+      .state('storepayment', {
+        url: '/storepayment',
+        templateUrl: 'views/storepayment.html',
+        controller: 'StorePaymentCtrl',
+        data: {
+          authorizedRoles: [USER_ROLES.admin, USER_ROLES.user]
         }
         })
       .state('user', {
@@ -96,7 +160,6 @@ angular
       #TODO: check authenicated
       #send parameters to dashboard
       $state.go('user')
-
     $rootScope.$on('oauth:error', (event, rejection) ->
       # Ignore `invalid_grant` error - should be catched on `LoginController`.
       if 'invalid_grant' is rejection.data.error
@@ -123,22 +186,22 @@ angular
     )
 
     $rootScope.$on(AUTH_EVENTS.notAuthenticated, (event, state) ->
-      $state.go('login')
+      $state.go('signin')
     ) 
 
     $rootScope.$on(AUTH_EVENTS.notAuthorized, (event, state) ->
-      $state.go('login')
+      $state.go('signin')
     )
 
     $rootScope.$on(AUTH_EVENTS.sessionTimeout, (event, state) ->
-      $state.go('login')
+      $state.go('signin')
     )
 
     $rootScope.$on(AUTH_EVENTS.loginSuccess, (event, state) ->
        #TODO: make sure it is ok to just call cancel
        #$scope.cancel()
        event.preventDefault()
-       $state.go('user')
+       $state.go('menu')
     )
   .controller('AppController', ($rootScope, $scope, USER_ROLES, AuthService) ->
     $rootScope.currentUser = null
