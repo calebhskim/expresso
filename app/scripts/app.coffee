@@ -36,7 +36,9 @@ angular
     user: 'user',
     guest: 'guest'
   })
-  .config ($stateProvider, $sessionStorageProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider, USER_ROLES) ->
+  .config ($stateProvider, $httpProvider, $sessionStorageProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider, USER_ROLES) ->
+    $httpProvider.defaults.useXDomain = true
+    delete $httpProvider.defaults.headers.common['X-Requested-With']
     OAuthProvider.configure({
       baseUrl: 'http://fathomless-sierra-4979.herokuapp.com/api/v1.2',
       clientId: 'c4be427f880b3ba97f0b',
@@ -175,8 +177,6 @@ angular
 
     $rootScope.$on('$stateChangeStart', (event, state) ->
       authorizedRoles = state.data.authorizedRoles
-      console.log(authorizedRoles)
-      console.log(AuthService.isAuthorized(authorizedRoles))
       if not AuthService.isAuthorized(authorizedRoles)
         event.preventDefault();
         if AuthService.isAuthenticated()
@@ -202,7 +202,6 @@ angular
     $rootScope.$on(AUTH_EVENTS.loginSuccess, (event, state) ->
        #TODO: make sure it is ok to just call cancel
        #$scope.cancel()
-       console.log('SUCCESS')
        $state.go('menu')
     )
   .controller('AppController', ($rootScope, $scope, USER_ROLES, AuthService) ->
