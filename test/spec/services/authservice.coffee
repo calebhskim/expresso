@@ -1,6 +1,6 @@
 'use strict'
 
-describe 'Service: authservice', ->
+describe 'Service: AuthService', ->
 
   # load the service's module
   beforeEach module 'expressoApp'

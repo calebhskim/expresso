@@ -24,33 +24,7 @@ angular.module 'expressoApp'
 
       $scope.login = (credentials) ->
          #TODO: Set current user
-         OAuth.getAccessToken(credentials).then(
-            (msg) ->
-               user = {
-                  name : credentials.username,
-                  role: 'user',
-                  id: null
-               }
-               $rootScope.setCurrentUser(user)
-               Session.create(null, null, 'user')
-               $rootScope.$broadcast(AUTH_EVENTS.loginSuccess)
-               
-            (msg) ->
-               $rootScope.$broadcast(AUTH_EVENTS.loginFailed)
-         )
+         AuthService.login(credentials)
 
       $scope.logout = () ->
-         OAuth.revokeToken().then(
-            (msg) ->
-            (msg) ->
-               $rootScope.$broadcast(AUTH_EVENTS.logoutFailure)
-         )
-         user = {
-            name : null,
-            role: null,
-            id: null
-         }
-         $rootScope.setCurrentUser(user)
-         Session.destroy()
-         $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess)
-         $state.go('home')
+         AuthService.logout()

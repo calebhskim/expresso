@@ -8,10 +8,10 @@
  # Controller of the expressoApp
 ###
 angular.module 'expressoApp'
-  .controller 'MenuCtrl', ->
-    @awesomeThings = [
-      'HTML5 Boilerplate'
-      'AngularJS'
-      'Karma'
-    ]
-    return
+   .controller 'MenuCtrl', ($state, $rootScope) ->
+      
+      @awesomeThings = [
+        'HTML5 Boilerplate'
+        'AngularJS'
+        'Karma'
+      ]
