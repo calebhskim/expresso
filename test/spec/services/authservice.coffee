@@ -6,9 +6,9 @@ describe 'Service: AuthService', ->
   beforeEach module 'expressoApp'
 
   # instantiate service
-  authservice = {}
-  beforeEach inject (_authservice_) ->
-    authservice = _authservice_
+  AuthService = {}
+  beforeEach inject (_AuthService_) ->
+    AuthService = _AuthService_
 
   it 'should do something', ->
-    expect(!!authservice).toBe true
+    expect(!!AuthService).toBe true

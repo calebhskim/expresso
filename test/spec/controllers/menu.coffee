@@ -32,8 +32,8 @@ describe 'Controller: MenuCtrl', ->
   beforeEach inject ($controller, $rootScope) ->
     scope = $rootScope.$new()
     MenuCtrl = $controller 'MenuCtrl', {
-     $scope: scope
+      $scope: scope
     }
 
-  it 'should attach a list of awesomeThings to the scope', ->
-    expect(MenuCtrl.awesomeThings.length).toBe 3
+  # it 'should attach a list of awesomeThings to the scope', ->
+  #   expect(MenuCtrl.awesomeThings.length).toBe 3

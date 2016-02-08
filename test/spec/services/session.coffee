@@ -6,9 +6,9 @@ describe 'Service: session', ->
   beforeEach module 'expressoApp'
 
   # instantiate service
-  session = {}
-  beforeEach inject (_session_) ->
-    session = _session_
+  Session = {}
+  beforeEach inject (_Session_) ->
+    Session = _Session_
 
   it 'should do something', ->
-    expect(!!session).toBe true
+    expect(!!Session).toBe true

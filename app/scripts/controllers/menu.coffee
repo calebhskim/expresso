@@ -8,8 +8,8 @@
  # Controller of the expressoApp
 ###
 angular.module 'expressoApp'
-   .controller 'MenuCtrl', ($rootScope, $scope, $state, $http, $cookieStore, $sessionStorage, $timeout, Session, Items, AUTH_EVENTS) ->
-      @awesomeThings = [
+   .controller 'MenuCtrl', ($rootScope, $scope, $state, $http, $cookieStore, $sessionStorage, $timeout, Session, AUTH_EVENTS) ->
+      $scope.awesomeThings = [
         'HTML5 Boilerplate'
         'AngularJS'
         'Karma'
@@ -19,9 +19,10 @@ angular.module 'expressoApp'
       $scope.currentItem = {}
       $scope.store = {}
 
-      if $sessionStorage.session.items is undefined 
+      if $sessionStorage.profile is undefined 
          Session.getProfile() 
          Session.getStore($sessionStorage.profile)
+         $scope.store = $sessionStorage.store
 
       $scope.items  = $sessionStorage.items
 
