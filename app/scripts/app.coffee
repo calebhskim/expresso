@@ -36,11 +36,12 @@ angular
     user: 'user',
     guest: 'guest'
   })
-  .config ($stateProvider, $httpProvider, $sessionStorageProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider, USER_ROLES) ->
+  .config ($stateProvider, $httpProvider, $resourceProvider, $sessionStorageProvider, $urlRouterProvider, OAuthProvider, OAuthTokenProvider, USER_ROLES) ->
     $httpProvider.defaults.useXDomain = true
     delete $httpProvider.defaults.headers.common['X-Requested-With']
+    $resourceProvider.defaults.stripTrailingSlashes = false;
     OAuthProvider.configure({
-      baseUrl: 'http://fathomless-sierra-4979.herokuapp.com/api/v1.2',
+      baseUrl: 'http://test-expresso-db.herokuapp.com/api/v1.2/',
       clientId: 'c4be427f880b3ba97f0b',
       clientSecret: '6e8a021d87308058c935c0c102b60589d720f85a',
       grantPath:'/oauth2/access_token/?',
@@ -54,14 +55,14 @@ angular
       }
     })
     $stateProvider
-      .state('home', {
-        url: '/',
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        data: {
-          authorizedRoles: [USER_ROLES.all]
-        }
-        })
+      # .state('home', {
+      #   url: '/',
+      #   templateUrl: 'views/main.html',
+      #   controller: 'MainCtrl',
+      #   data: {
+      #     authorizedRoles: [USER_ROLES.all]
+      #   }
+      #  })
       .state('contact', {
         url: '/contact',
         templateUrl: 'views/contact.html',
@@ -87,7 +88,7 @@ angular
         }
         })
       .state('signin', {
-        url: '/signin',
+        url: '/',
         templateUrl: 'views/signin.html',
         controller: 'LoginCtrl',
         data: {
