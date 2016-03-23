@@ -26,89 +26,99 @@ angular.module 'expressoApp'
          return $sessionStorage.session
 
       session.getProfile = () ->
-         $http({
+         return $http({
             method: 'GET',
             url: weburl + 'stores/profile/',
             headers: {
                'Authorization': token.token_type + ' ' + token.access_token
             }
-         }).then(
-            (response) ->
-               console.log('Get Profile success')
-               $sessionStorage.profile = response.data.id
-               session.id = $sessionStorage.profile
-               session.getItems(session.id)
-            (response) ->
-               console.log('Get Profile Failure')
-         )
+         })
+         # .then(
+         #    (response) ->
+         #       console.log('Get Profile success')
+         #       $sessionStorage.profile = response.data.id
+         #       session.getStore($sessionStorage.profile)
+         #       session.getItems($sessionStorage.profile)
+         #    (response) ->
+         #       console.log('Get Profile Failure')
+         # )
 
       session.getStore = (id) ->
-         $http({
+         return $http({
             method: 'GET',
             url: weburl + 'stores/' + id + '/',
             headers: {
                'Authorization': token.token_type + ' ' + token.access_token
             }
-         }).then(
-            (response) ->
-               console.log('Get Store success')
-               $sessionStorage.store = response.data
-            (response) ->
-               console.log('Get Store failure')
-         )
+         })
+         # .then(
+         #    (response) ->
+         #       console.log('Get Store success')
+         #       $sessionStorage.store = response.data
+         #    (response) ->
+         #       console.log('Get Store failure')
+         # )
 
       session.getItems = (id) ->
-         $http({
+         return $http({
             method: 'GET',
             url: weburl + 'stores/' + id + '/items/',
             headers: {
                'Authorization': token.token_type + ' ' + token.access_token
             }
-         }).then(
-            (response) ->
-               console.log('Get Items success')
-               $sessionStorage.items = response.data
-            (response) ->
-               console.log('Get Items Failure')
-         )
-      session.addItem = (name, price, category) ->
+         })
+         # .then(
+         #    (response) ->
+         #       console.log('Get Items success')
+         #       $sessionStorage.items = response.data
+         #    (response) ->
+         #       console.log('Get Items Failure')
+         # )
+         
+      session.addItem = (itemName, itemPrice, itemCategory, itemSubCat) ->
+         console.log(weburl + 'stores/' + $sessionStorage.profile + '/items/')
+         console.log(token.token_type + ' ' + token.access_token)
+
          item = {
-            "name": name,
+            "category": itemCategory,
+            "customizations": [],
+            "id": 23,
             "description":"",
-            "category": category,
-            "subcategory": "Chicken" + category,
+            "image_url": "",
+            "name": itemName,
             "sizes": [
                {
                   "name":"Regular",
-                  "price": price,
+                  "price": itemPrice,
                   "inventory": 10
                }
             ],
-            "customizations": []
+            "subcategory": itemSubCat,            
          }
 
-         console.log(weburl + 'stores/' + session.id + '/items/')
-         console.log(token.token_type + ' ' + token.access_token)
-         $http({
+         #TODO: remove
+         $sessionStorage.items.push item
+
+         return $http({
             method: 'POST',
-            url: weburl + 'stores/' + session.id + '/items/',
+            url: weburl + 'stores/' + $sessionStorage.profile + '/items/',
             data: item,
             headers: {
                'Authorization': token.token_type + ' ' + token.access_token
             }
-         }).then(
-            (response) ->
-               console.log('Add item success')
-            (response) ->
-               console.log('Add item failure')
-         )
-         session.getItems(session.id)
+         })
+         # .then(
+         #    (response) ->
+         #       console.log('Add item success')
+         #    (response) ->
+         #       console.log('Add item failure')
+         # )
+         # session.getItems($sessionStorage.profile)
 
       session.deleteItem = (id) ->
          $http({
             method: 'DELETE',
             url: weburl + 'stores/' + session.id + '/items/' + id + '/',
-            data: item,
             headers: {
                'Authorization': token.token_type + ' ' + token.access_token
             }
@@ -118,7 +128,51 @@ angular.module 'expressoApp'
             (response) ->
                console.log('Delete Items Failure')
          )
-         session.getItems(session.id)
+         session.getItems($sessionStorage.profile)
 
+      session.getCurrentItem = (id) ->
+         return $http({
+            method: 'GET',
+            url: weburl + 'stores/' + $sessionStorage.profile + '/items/' + id + '/',
+            headers: {
+               'Authorization': token.token_type + ' ' + token.access_token
+            }
+         })
+         # .then(
+         #    (response) ->
+         #       console.log('Get item success')
+         #       $sessionStorage.currentItem = response
+         #    (response) ->
+         #       console.log('Get item failure')
+         # )
+
+      session.getItemCustomization = (id) ->
+         return $http({
+            method: 'GET',
+            url: weburl + 'stores/' + $sessionStorage.profile + '/customizations/' + id + '/',
+            headers: {
+               'Authorization': token.token_type + ' ' + token.access_token
+            }
+         })
+         # .then(
+         #    (response) ->
+         #       console.log('Get customizations success')
+         #       return response
+         #    (response) ->
+         #       console.log('Get customizations failure')
+         #       return -1
+         # )
+
+      session.getCustomizations = (ids) ->
+         customizations = []
+         if not angular.isArray(ids)
+            ids = [ids]
+
+         for id in ids
+            temp = session.getItemCustomization(id)
+            if temp != -1
+               customizations.push(temp)
+
+         $sessionStorage.customizations = customizations
       return session
 

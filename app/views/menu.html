@@ -1,5 +1,5 @@
 <!-- Main Content Container for Menu Dashboard -->  
-<div ng-controller="MenuCtrl as menu" class="container">
+<div class="container">
   <div class="row">
     <div class="col-sm-12">
       <!-- Welcome text for Store -->
@@ -17,7 +17,7 @@
             </tr>
           </thead>
           <tbody>
-              <tr ng-repeat="item in items track by $index" style="cursor:pointer;" onclick="">
+              <tr ng-repeat="item in items track by $index" style="cursor:pointer;" ng-click="changeCurrentItem(item)">
                 <td>{{item.name}}<br><small style="opacity: 0.6;">{{item.category}}</small></td>
                   <td style="text-align:right;"><strong>{{item.sizes[0].price / 100 | currency}}</strong><br><small style="opacity: 0.6;">{{item.sizes.length}} Sizes – {{item.customizations.length}} Customizations</small></td>
               </tr> 
@@ -27,10 +27,49 @@
                   <td style="text-align:right;"><strong>$1.75</strong><br><small style="opacity: 0.6;">3 Sizes – 5 Customizations</small></td>
               </tr> -->
                 
-              <tr style="font-style:italic;"> <!-- New Item Addition Menu Option -->
-                <td width="50%"><input id="new-item-name" type="text" class="form-control input-sm" placeholder="New Menu Item"><br><input id="new-item-category" type="text" class="form-control input-sm" placeholder="Item Category"><small style="opacity: 0.6;"></small></td>
-                  <td style="text-align:right;"><div class="input-group"><span class="input-group-addon"><strong>$</strong></span><strong><input id="new-item-price" type="number" class="form-control input-sm" placeholder="0.00" step=".01"></strong></div><br><button ng-click="addItem()" type="button" class="btn btn-primary btn-sm btn-block"><strong style="font-style:normal;">Add Item</strong></button></td>
-              </tr>   
+          <!-- <tr style="font-style:italic;"> 
+                <td width="50%">
+                  <input id="new-item-name" type="text" class="form-control input-sm" placeholder="New Menu Item">
+                  <br>
+                  <input id="new-item-category" type="text" class="form-control input-sm" placeholder="Item Category">
+                  <small style="opacity: 0.6;"></small>
+                </td>
+                <td style="text-align:right;">
+                  <div class="input-group">
+                  <span class="input-group-addon">
+                  <strong>$</strong>
+                  </span>
+                  <strong>
+                    <input id="new-item-price" type="number" class="form-control input-sm" placeholder="0.00" step=".01">
+                  </strong>
+                  </div>
+                  <input type="text" class="form-control input-sm" placeholder="Item Sub Category" style="margin: 3px 0;" >
+                  <br>
+                  <button ng-click="addItem()" type="button" class="btn btn-primary btn-sm btn-block">
+                    <strong style="font-style:normal;">Add Item</strong>
+                  </button>
+                </td>
+              </tr>    -->
+              <tr onclick="" style="font-style:italic;"> <!-- New Item Addition Menu Option -->
+                <td width="50%">
+                  <input id="new-item-name" type="text" class="form-control input-sm" placeholder="New Menu Item" style="margin: 0 7px">
+                  <input id="new-item-category" type="text" class="form-control input-sm" placeholder="Item Category" style="margin: 7px">
+                </td>
+                <td style="text-align:right;" colspan="2">
+                  <div class="input-group col-xs-12" style="padding: 2px">
+                    <span class="input-group-addon">
+                      <strong>$</strong>
+                    </span>
+                    <strong>
+                      <input id="new-item-price" type="number" class="form-control input-sm" placeholder="0.00" step=".01">
+                    </strong>
+                  </div>
+                  <input id="new-item-sub-cat" type="text" class="form-control input-sm" placeholder="Item Sub Category" style="margin: 3px 0;" >
+                  <button type="button" class="btn btn-raised btn-warning">
+                    <strong style="font-style:normal;">Add Item</strong>
+                  </button>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -58,12 +97,12 @@
                   <div class="row">
                       <div class="itemedit-image col-xs-3">
                           <div><span class="glyphicon glyphicon-cloud-upload"></span></div>
-                          <img class="itemedit-image" src="images/americano.jpg" width="100%;"> <!-- Menu Item Image -->
+                          <img class="itemedit-image" ng-src="{{currentItem.image_url}}" width="100%;"> <!-- Menu Item Image -->
                           
                       </div>
                       <div class="col-xs-9"> <!-- Menu Item Title and Category Fields -->
-                          <p><input type="text" class="form-control input-lg" placeholder="Item Name" value="Americano"></p>
-                          <p><input type="text" class="form-control input" placeholder="Item Category" value="Hot Drinks"></p> <!-- Changes Item Category. Reccomended options of current cateogries will dropdown while typing. Inputting a category that doesn't exist will create a new category with that name -->
+                          <p><input type="text" class="form-control input-lg" placeholder="Item Name" ng-model="currentItem.name"></p>
+                          <p><input type="text" class="form-control input" placeholder="Item Category" ng-model="currentItem.category"></p> <!-- Changes Item Category. Reccomended options of current cateogries will dropdown while typing. Inputting a category that doesn't exist will create a new category with that name -->
                       </div>
                   </div>
               </div>
@@ -77,25 +116,11 @@
               </tr>
             </thead>
             <tbody>
-                
-              <tr>
-                <td>Small</td>
-                  <td style="text-align:right;"><strong>$1.75</strong></td>
-                  <td style="cursor:pointer; width:30px; text-align:center;"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
-              </tr>
-                
-              <tr>
-                <td>Medium</td>
-                  <td style="text-align:right;"><strong>$2.25</strong></td>
-                  <td style="cursor:pointer; width:30px; text-align:center;"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
-              </tr>
-                
-              <tr>
-                <td>Large</td>
-                  <td style="text-align:right;"><strong>$2.65</strong></td>
-                  <td style="cursor:pointer; width:30px; text-align:center;"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
-              </tr>
-                
+              <tr ng-repeat="size in currentItem.sizes track by $index">
+                <td>{{size.name}}</td>
+                <td style="text-align:right;"><strong>{{size.price / 100 | currency}}</strong></td>
+                <td style="cursor:pointer; width:30px; text-align:center;"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
+              </tr>                 
               <tr style="font-style:italic;"> <!-- Add New Size Table Option -->
                 <td width="50%"><input type="text" class="form-control input-sm" placeholder="New Size"></td>
                   <td style="text-align:right; vertical-align:middle;"><div class="input-group"><span class="input-group-addon"><strong>$</strong></span><strong><input type="number" class="form-control input-sm" placeholder="0.00" step=".01"></strong></div></td>
@@ -203,4 +228,11 @@
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
-</div><!-- /.modal
+</div><!-- /.modal -->
+<script type="text/javascript">
+
+    $('#deleteModal').on('shown.bs.modal', function () {
+      $('#deleteModal').focus()
+    })
+
+</script>

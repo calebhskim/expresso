@@ -151,7 +151,22 @@ body {
     height: 100%;
     display: none;
 }
-
+.item-header {
+    font-size: 1.1em;
+}
+.item-subheader {
+    text-align:right; 
+    font-size: 1.1em;
+}
+.edit-icon {
+    color: rgb(113,113,113);
+}
+.panel, .panel-primary {
+    border-radius: 0px;
+}
+.left-title {
+    padding-left: 8px;
+}
 
 /*
  * Placeholder dashboard ideas
