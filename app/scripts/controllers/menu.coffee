@@ -23,6 +23,7 @@ angular.module 'expressoApp'
 
       Session.getProfile().then(
         (response) ->
+          $sessionStorage.profile = response.data.id
           Session.getStore($sessionStorage.profile).then(
             (response) ->
               $sessionStorage.store = response.data
@@ -36,6 +37,7 @@ angular.module 'expressoApp'
                   if $scope.items.length != 0
                     Session.getCurrentItem($sessionStorage.items[0].id).then(
                       (response) ->
+                        $sessionStorage.currentItem = response
                         $scope.currentItem = $sessionStorage.currentItem.data
                         Session.getCustomizations($sessionStorage.currentItem.data.id)
                         $scope.customizations = $sessionStorage.customizations
@@ -84,9 +86,9 @@ angular.module 'expressoApp'
         itemPrice = $('#new-item-price').val()
         itemCategory = $('#new-item-category').val()
         itemSubCat = $('#new-item-sub-cat').val()
-
         Session.addItem(itemName, itemPrice, itemCategory, itemSubCat).then(
           (response) ->
+            console.log("Add item success")
             session.getItems($sessionStorage.profile).then(
               (response) ->
                 $scope.items = $sessionStorage.items
@@ -97,7 +99,29 @@ angular.module 'expressoApp'
           (response) ->
             console.log("Add Item failure")
           )
-        #console.log($sessionStorage.items)
+        console.log($sessionStorage.items)
 
       $scope.changeCurrentItem = (item) ->
         $scope.currentItem = item
+
+      $scope.deleteItem = () ->
+        Session.deleteItem($scope.currentItem.id).then(
+          (response) ->
+            session.getItems($sessionStorage.profile).then(
+              (response) ->
+                $sessionStorage.items = response.data  
+                Session.getCurrentItem($sessionStorage.items[0].id).then(
+                  (response) ->
+                    $sessionStorage.currentItem = response
+                    $scope.currentItem = $sessionStorage.currentItem.data
+                    Session.getCustomizations($sessionStorage.currentItem.data.id)
+                    $scope.customizations = $sessionStorage.customizations
+                  (response) ->
+                    console.log("Delete item get current failure")
+                  )
+              (response) ->
+                console.log("Delete item get items failure")
+              )
+          (response) ->
+            console.log("Delete item failure")
+          )

@@ -8,7 +8,7 @@
  # Service in the expressoApp.
 ###
 angular.module 'expressoApp'
-   .service 'AuthService', ($rootScope, Session, OAuth, AUTH_EVENTS, USER_ROLES) ->
+   .service 'AuthService', ($rootScope, $timeout, Session, OAuth, AUTH_EVENTS, USER_ROLES) ->
       authService = {}
       
       authService.login = (credentials) ->

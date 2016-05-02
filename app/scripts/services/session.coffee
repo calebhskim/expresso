@@ -12,6 +12,7 @@ angular.module 'expressoApp'
    .service 'Session', ($rootScope, $sessionStorage, USER_ROLES, $http, $cookieStore, $timeout, AUTH_EVENTS) ->
       weburl = 'https://test-expresso-db.herokuapp.com/website/api/v1.2/'
       token = $cookieStore.get('token')
+      console.log(token)
       session = {}
       
       session.create = (sessionId, userId, userRole) ->
@@ -76,37 +77,40 @@ angular.module 'expressoApp'
          # )
          
       session.addItem = (itemName, itemPrice, itemCategory, itemSubCat) ->
-         console.log(weburl + 'stores/' + $sessionStorage.profile + '/items/')
+         console.log(weburl + "stores/" + $sessionStorage.profile + "/items/")
          console.log(token.token_type + ' ' + token.access_token)
 
          item = {
-            "category": itemCategory,
-            "customizations": [],
-            "id": 23,
-            "description":"",
-            "image_url": "",
             "name": itemName,
+            "description":"",
+            "category": itemCategory,
+            "subcategory": itemSubCat,
             "sizes": [
                {
                   "name":"Regular",
                   "price": itemPrice,
-                  "inventory": 10
+                  "inventory": "10"
                }
             ],
-            "subcategory": itemSubCat,            
+            "customizations": []
+            # "id": 23,
+            # "image_url": "",        
          }
-
+         console.log(itemName + ' ' + itemPrice  + ' ' + itemCategory + ' ' + itemSubCat)
+         # console.log()
+         console.log(JSON.parse(JSON.stringify(item)))
          #TODO: remove
          $sessionStorage.items.push item
 
          return $http({
-            method: 'POST',
-            url: weburl + 'stores/' + $sessionStorage.profile + '/items/',
+            method: "POST",
+            url: weburl + "stores/" + $sessionStorage.profile + "/items/",
             data: item,
             headers: {
-               'Authorization': token.token_type + ' ' + token.access_token
+               "Authorization": token.token_type + " " + token.access_token
             }
          })
+
          # .then(
          #    (response) ->
          #       console.log('Add item success')
@@ -116,19 +120,20 @@ angular.module 'expressoApp'
          # session.getItems($sessionStorage.profile)
 
       session.deleteItem = (id) ->
-         $http({
+         return $http({
             method: 'DELETE',
             url: weburl + 'stores/' + session.id + '/items/' + id + '/',
             headers: {
                'Authorization': token.token_type + ' ' + token.access_token
             }
-         }).then(
-            (response) ->
-               console.log('Delete item success')
-            (response) ->
-               console.log('Delete Items Failure')
-         )
-         session.getItems($sessionStorage.profile)
+         })
+         # .then(
+         #    (response) ->
+         #       console.log('Delete item success')
+         #    (response) ->
+         #       console.log('Delete Items Failure')
+         # )
+         # session.getItems($sessionStorage.profile)
 
       session.getCurrentItem = (id) ->
          return $http({
@@ -175,4 +180,7 @@ angular.module 'expressoApp'
 
          $sessionStorage.customizations = customizations
       return session
+
+      session.editItem = () ->
+
 

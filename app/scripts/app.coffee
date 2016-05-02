@@ -203,7 +203,11 @@ angular
     $rootScope.$on(AUTH_EVENTS.loginSuccess, (event, state) ->
        #TODO: make sure it is ok to just call cancel
        #$scope.cancel()
-       $state.go('menu')
+       $timeout(
+        () ->
+          $state.go('menu')
+        1500
+        )
     )
   .controller('AppController', ($rootScope, $scope, USER_ROLES, AuthService) ->
     $rootScope.currentUser = null
